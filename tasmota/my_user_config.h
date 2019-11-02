@@ -103,7 +103,7 @@
 
 // -- MQTT topics ---------------------------------
   // Example "tasmota/bedroom/%topic%/%prefix%/" up to 80 characers
-#define MQTT_FULLTOPIC         "%prefix%/%topic%/" // [FullTopic] Subscribe and Publish full topic name - Legacy topic
+#define MQTT_FULLTOPIC         "%topic%/%prefix%/" // [FullTopic] Subscribe and Publish full topic name - Legacy topic
 
 // %prefix% token options
 #define SUB_PREFIX             "cmnd"            // [Prefix1] Tasmota devices subscribe to %prefix%/%topic% being SUB_PREFIX/MQTT_TOPIC and SUB_PREFIX/MQTT_GRPTOPIC
@@ -200,7 +200,7 @@
 
 // -- Application ---------------------------------
 #define APP_TIMEZONE           1                 // [Timezone] +1 hour (Amsterdam) (-13 .. 14 = hours from UTC, 99 = use TIME_DST/TIME_STD)
-#define APP_LEDSTATE           LED_POWER         // [LedState] Function of led
+#define APP_LEDSTATE           LED_OFF         // [LedState] Function of led
                                                  //   (LED_OFF, LED_POWER, LED_MQTTSUB, LED_POWER_MQTTSUB, LED_MQTTPUB, LED_POWER_MQTTPUB, LED_MQTT, LED_POWER_MQTT)
 #define APP_LEDMASK            0xFFFF            // [LedMask] Assign Relay to Power led (0xFFFF is default)
 #define APP_PULSETIME          0                 // [PulseTime] Time in 0.1 Sec to turn off power for relay 1 (0 = disabled)
@@ -208,7 +208,7 @@
                                                  //   (POWER_ALL_OFF, POWER_ALL_ON, POWER_ALL_SAVED_TOGGLE, POWER_ALL_SAVED, POWER_ALL_ALWAYS_ON, POWER_ALL_OFF_PULSETIME_ON)
 #define APP_BLINKTIME          10                // [BlinkTime] Time in 0.1 Sec to blink/toggle power for relay 1
 #define APP_BLINKCOUNT         10                // [BlinkCount] Number of blinks (0 = 32000)
-#define APP_SLEEP              0                 // [Sleep] Sleep time to lower energy consumption (0 = Off, 1 - 250 mSec)
+#define APP_SLEEP              250                 // [Sleep] Sleep time to lower energy consumption (0 = Off, 1 - 250 mSec)
 
 #define KEY_DEBOUNCE_TIME      50                // [ButtonDebounce] Number of mSeconds button press debounce time
 #define KEY_HOLD_TIME          40                // [SetOption32] Number of 0.1 seconds to hold Button or external Pushbutton before sending HOLD message
@@ -331,7 +331,7 @@
 #define USE_BUZZER                               // Add support for a buzzer (+0k6 code)
 #define USE_ARILUX_RF                            // Add support for Arilux RF remote controller (+0k8 code, 252 iram (non 2.3.0))
 //#define USE_SHUTTER                              // Add Shutter support for up to 4 shutter with different motortypes (+6k code)
-//#define USE_DEEPSLEEP                            // Add support for deepsleep (+1k code)
+#define USE_DEEPSLEEP                            // Add support for deepsleep (+1k code)
 //#define USE_EXS_DIMMER                           // Add support for ES-Store WiFi Dimmer (+1k5 code)
 //  #define EXS_MCU_CMNDS                            // Add command to send MCU commands (+0k8 code)
 
@@ -359,6 +359,7 @@
 #define USE_I2C                                  // I2C using library wire (+10k code, 0k2 mem, 124 iram)
 
 #ifdef USE_I2C
+  #define USE_AM2320
   #define USE_SHT                                // Enable SHT1X sensor (+1k4 code)
   #define USE_HTU                                // Enable HTU21/SI7013/SI7020/SI7021 sensor (I2C address 0x40) (+1k5 code)
   #define USE_BMP                                // Enable BMP085/BMP180/BMP280/BME280 sensors (I2C addresses 0x76 and 0x77) (+4k4 code)
